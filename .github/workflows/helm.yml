@@ -10,14 +10,20 @@ jobs:
     name: Helm Build
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout tag
-      uses: actions/checkout@v2
-      with:
-        path: tag
-    
     - name: Get the version
       id: release_name
       run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
+    - name: Get the semversion
+      id: release_semversion
+      run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3 | sed -i 's:^v::')
+
+    - name: Checkout tag
+      uses: actions/checkout@v2
+      with:
+        path: ${{ steps.release_name.outputs.VERSION }}
+        ref: ${{ steps.release_name.outputs.VERSION }}
+    
 
     - name: Checkout gh-pages
       uses: actions/checkout@v2
@@ -27,15 +33,15 @@ jobs:
 
     - name: Build chart repo
       run: |
-        mkdir -p tag/artifacts
-        cd tag/artifacts
+        mkdir -p ${{ steps.release_name.outputs.VERSION }}/artifacts
+        cd ${{ steps.release_name.outputs.VERSION }}/artifacts
         sed -i "s#tag: latest#tag: ${{ steps.release_name.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/values.yaml
-        sed -i "s#ersion: latest#ersion: $(echo $GITHUB_REF | cut -d / -f 3 | sed -i 's:v::g')#g" ../build/helm/dynratelimiter-operator/Chart.yaml
+        sed -i "s#ersion: latest#ersion: ${{ steps.release_semversion.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/Chart.yaml
         helm package ../build/helm/dynratelimiter-operator
         mv * ../../gh-pages/
         cd ../../gh-pages
         helm repo index . --url https://arivum.github.io/dynratelimiter
-        cp ../tag/README.md .
+        cp ../${{ steps.release_name.outputs.VERSION }}/README.md .
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
