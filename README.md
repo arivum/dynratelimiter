@@ -75,7 +75,7 @@ helm repo update
 touch my_values.yaml
 
 # Deploy the operator
-helm upgrade --install dynratelimiter-operator dynratelimiter/dynratelimit-operator
+helm upgrade --install -f my_values.yaml dynratelimiter-operator dynratelimiter/dynratelimiter-operator
 
 # Show if operator came up successfully
 kubectl --namespace dynratelimiter-operator get pods
