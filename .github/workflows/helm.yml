@@ -28,9 +28,9 @@ jobs:
     - name: Build chart repo
       run: |
         mkdir -p tag/artifacts
+        cd tag/artifacts
         sed -i "s#tag: latest#tag: ${{ steps.release_name.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/values.yaml
         sed -i "s#ersion: latest#erstion: ${{ steps.release_name.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/Chart.yaml
-        cd tag/artifacts
         helm package ../build/helm/dynratelimiter-operator
         mv * ../../gh-pages/
         cd ../../gh-pages
