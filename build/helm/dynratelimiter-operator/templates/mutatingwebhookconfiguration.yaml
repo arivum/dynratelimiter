@@ -1,0 +1,33 @@
+---
+{{ include "dynratelimiter-operator.certs" . }}
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: {{ .Values.appname }}-webhook-cfg
+  namespace: {{ .Values.namespace }}
+webhooks:
+  - clientConfig:
+      service:
+        name: {{ .Values.appname }}
+        namespace: {{ .Values.namespace }}
+        path: /mutate
+      caBundle: "{{ .Values.caCert }}"
+    failurePolicy: Fail
+    name: {{ .Values.appname }}.arifin.io
+    namespaceSelector:
+      matchExpressions:
+        - key: sidecar-injection
+          operator: NotIn
+          values: ["disabled"]
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+        resources:
+          - pods
+    sideEffects: None
+    admissionReviewVersions:
+      - v1

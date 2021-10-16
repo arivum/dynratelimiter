@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: get-injected
+  annotations: 
+    dynratelimiter.arifin.io/inject: "enabled"
+    dynratelimiter.arifin.io/loglevel: "debug"
+    thresholds.dynratelimiter.arifin.io/ram: "80%"
+    thresholds.dynratelimiter.arifin.io/cpu: "80%"
+spec:
+  containers:
+  - name: main-container
+    image: registry.hub.docker.com/library/busybox
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do sleep 1; date; done"]
+    resources:
+      requests:
+        memory: 100M
+        cpu: 100m
+      limits:
+        memory: 100M
+        cpu: 100m

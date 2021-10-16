@@ -1,0 +1,63 @@
+stages:
+  - build
+  - pack
+
+build-operator:
+  image: golang:1.17.1-alpine3.14
+  stage: build
+  variables:
+    CGO_ENABLED: "0"
+  script:
+    - apk update
+    - apk add make git clang linux-headers musl-dev
+    - make build-dynratelimiter-operator
+  artifacts:
+    paths:
+      - dynratelimiter
+
+build-rate-limiter:
+  image: golang:1.17.1-alpine3.14
+  stage: build
+  variables:
+    CGO_ENABLED: "0"
+  script:
+    - apk update
+    - apk add make git clang linux-headers musl-dev
+    - make build
+  artifacts:
+    paths:
+      - dynratelimiter
+
+pack-operator:
+  image: docker:latest
+  stage: pack
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+    IMAGE_TAG: $CI_COMMIT_REF_SLUG
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - apk update
+    - apk add make
+    - make pack-dynratelimiter-operator
+
+pack-rate-limiter:
+  image: docker:latest
+  stage: pack
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+    IMAGE_TAG: $CI_COMMIT_REF_SLUG
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - apk update
+    - apk add make
+    - make pack-dynratelimiter

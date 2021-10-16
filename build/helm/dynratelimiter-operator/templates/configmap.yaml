@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.appname }}-webhook-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  config.yaml: |
+    port: {{ .Values.service.targetPort }}
+    logging:
+      {{- toYaml .Values.logging | nindent 6 }}
+    mutationConfig:
+      {{- toYaml .Values.mutationConfig | nindent 6 }}

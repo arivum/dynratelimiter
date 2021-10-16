@@ -1,0 +1,10 @@
+{{ include "dynratelimiter-operator.certs" . }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.appname }}-tls
+  namespace: {{ .Values.namespace }}
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ .Values.tlsCert  }}
+  tls.key: {{ .Values.tlsKey }}

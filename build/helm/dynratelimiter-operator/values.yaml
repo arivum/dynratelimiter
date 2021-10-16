@@ -1,0 +1,57 @@
+# * Copyright (c) 2021, arivum.
+# * All rights reserved.
+# * SPDX-License-Identifier: MIT
+# * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/MIT
+
+replicaCount: 1
+appname: dynratelimiter-operator
+# specify the target namespace for deploying the operator
+namespace: dynratelimiter-operator
+# specify which image and tag should be used to deploy the operator
+image:
+  repository: ghcr.io/arivum/dynratelimiter/dynratelimiter-operator
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# specify logging options
+logging:
+  # loglevel must be one of [info, debug, warn, error, trace].
+  # default: info
+  level: info
+  # format can be one of [gofmt, json]
+  # default: gofmt
+  format: gofmt
+
+# configure operator specificy
+mutationConfig:
+  # specify an image to inject into initContainers of the target pods.
+  # the dynratelimiter binary will be copied from this initContainer into all the containers inside the target pods. 
+  image: ghcr.io/arivum/dynratelimiter/dynratelimiter
+  tag: latest
+
+# specify kubernetes service options
+service:
+  type: ClusterIP
+  port: 443
+  targetPort: 8443
+
+# specify resource limits and requests
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+caBundle:

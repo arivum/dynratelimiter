@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appname }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.appname }}
+      app.kubernetes.io/instance: {{ .Values.appname }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/certificate.yaml") . | sha256sum }}
+      labels:
+        app.kubernetes.io/name: {{ .Values.appname }}
+        app.kubernetes.io/instance: {{ .Values.appname }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: /etc/dynratelimiter-operator/config
+              name: webhook-config
+            - name: webhook-certs
+              mountPath: /etc/dynratelimiter-operator/certs
+              readOnly: true
+          command:
+            - /usr/bin/dynratelimiter-operator
+            - -conf
+            - /etc/dynratelimiter-operator/config/config.yaml
+            - -tls-cert
+            - /etc/dynratelimiter-operator/certs/tls.crt
+            - -tls-key
+            - /etc/dynratelimiter-operator/certs/tls.key
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+              name: https
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: https
+              scheme: HTTPS
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: https
+              scheme: HTTPS
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        - configMap:
+            name: {{ .Values.appname }}-webhook-configmap
+          name: webhook-config
+        - name: webhook-certs
+          secret:
+            secretName: {{ .Values.appname }}-tls

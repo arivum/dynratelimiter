@@ -1,0 +1,24 @@
+# configure thresholds that trigger rate limiting, once hit
+thresholds:
+  # initial request limit. "slow-starts" rate limiting
+  initialRateLimit: 10
+  # specify either:
+  # * maximum cpu core fraction: e.g. 1core, 250m, 250mcores, 250000µ, 250000µcores
+  # * maximum usage: e.g 80%
+  cpu: 80%
+  # specify either:
+  # * total maximum RAM size: 4G, 4GB, 4GiB, 4096M, 4096MiB
+  # * maximum percentage: 80%
+  ram: 80%
+# specify a list of interfaces to attach the ratelimiter.
+# If list is empty, the ratelimiter will be attached to all interfaces in the current netns
+interfaces:
+  - lo
+# specify logging options
+logging:
+  # loglevel must be one of [info, debug, warn, error, trace].
+  # default: info
+  level: debug
+  # format can be one of [gofmt, json]
+  # default: gofmt
+  format: gofmt

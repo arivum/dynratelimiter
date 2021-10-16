@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inject-me-deployment
+spec:
+  selector:
+    matchLabels:
+      app: inject-me-deployment
+  template:
+    metadata:
+      labels:
+        app: inject-me-deployment
+      name: get-injected
+      annotations: 
+        dynratelimiter.arifin.io/inject: "enabled"
+        dynratelimiter.arifin.io/loglevel: "debug"
+        thresholds.dynratelimiter.arifin.io/ram: "80%"
+        thresholds.dynratelimiter.arifin.io/cpu: "80%"
+    spec:
+      containers:
+      - name: main-container
+        image: registry.hub.docker.com/library/busybox
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 1; date; done"]
+        resources:
+          requests:
+            memory: 10M
+            cpu: 10m
+          limits:
+            memory: 10M
+            cpu: 10m
