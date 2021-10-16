@@ -4,6 +4,10 @@ Rate limiting based on resource usage - either RAM and/or CPU. If resource usage
 
 An initial rate limit is used to "slow start" the maximum allowed requests.
 
+As shown in the figures below, DynRateLimiter can increase the total thoughput of requests in high load or high memory server scenarios.
+
+![](tests/loadtest/base.png)
+![](tests/loadtest/spike.png)
 
 ## Run locally ...
 
