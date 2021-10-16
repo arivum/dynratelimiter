@@ -18,10 +18,6 @@ jobs:
     - name: Get the version
       id: release_name
       run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
-    
-    - name: Get the semantic version
-      id: release_semversion
-      run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3 | sed -i "s:v::g")
 
     - name: Checkout gh-pages
       uses: actions/checkout@v2
@@ -34,7 +30,7 @@ jobs:
         mkdir -p tag/artifacts
         cd tag/artifacts
         sed -i "s#tag: latest#tag: ${{ steps.release_name.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/values.yaml
-        sed -i "s#ersion: latest#ersion: ${{ steps.release_semversion.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/Chart.yaml
+        sed -i "s#ersion: latest#ersion: $(echo $GITHUB_REF | cut -d / -f 3 | sed -i 's:v::g')#g" ../build/helm/dynratelimiter-operator/Chart.yaml
         helm package ../build/helm/dynratelimiter-operator
         mv * ../../gh-pages/
         cd ../../gh-pages
