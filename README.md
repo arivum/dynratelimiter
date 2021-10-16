@@ -11,15 +11,6 @@ As shown in the figures below, DynRateLimiter can increase the total thoughput o
 
 ## Run locally ...
 
-### ... via prebuild binary
-
-Download the [latest release binary from GitHub](https://github.com/arivum/dynratelimiter/releases).
-
-```bash
-sudo wget https://github.com/arivum/dynratelimiter/releases/download/0.1.0/dynratelimiter_$(uname -m) -O /usr/local/bin/dynratelimiter
-sudo chmod +x /usr/local/bin/dynratelimiter
-```
-
 ### ... via Go install
 ```bash
 go install https://github.com/arivum/dynratelimiter@latest

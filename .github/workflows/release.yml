@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Get the version
       id: release_name
       run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
@@ -19,9 +19,6 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.16
-
-    - name: Test
-      run: go test -v ./...
 
     - name: Create Release
       id: create_release
@@ -33,17 +30,6 @@ jobs:
         release_name: Release ${{ steps.release_name.outputs.VERSION }}
         draft: false
         prerelease: false
-
-    - name: Upload prebuild binary
-      id: upload-release-asset-dynratelimiter
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./dynratelimiter
-        asset_name: webviewer.js
-        asset_content_type: application/octet-stream
 
     - name: Publish go module
       run: GOPROXY=proxy.golang.org go list -m github.com/arivum/resource-ticker@${{ steps.release_name.outputs.VERSION }}
