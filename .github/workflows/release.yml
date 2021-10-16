@@ -32,4 +32,4 @@ jobs:
         prerelease: false
 
     - name: Publish go module
-      run: GOPROXY=proxy.golang.org go list -m github.com/arivum/resource-ticker@${{ steps.release_name.outputs.VERSION }}
+      run: go list -m github.com/arivum/resource-ticker@${{ steps.release_name.outputs.VERSION }}
