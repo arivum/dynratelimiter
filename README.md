@@ -1,5 +1,19 @@
 # DynRateLimiter
 
+## Table of contents
+* [Introduction](#introduction)
+* [Run locally ...](#run-locally-)
+  + [... via Go install](#-via-go-install)
+  + [... and show usage](#-and-show-usage)
+  + [... with configuration file](#-with-configuration-file)
+* [Inject into Kubernetes pods](#inject-into-kubernetes-pods)
+  + [Possible annotations for controlling DynRateLimiter](#possible-annotations-for-controlling-dynratelimiter)
+* [Development](#development)
+  + [Run and Test locally](#run-and-test-locally)
+  + [Rate limit calculation](#rate-limit-calculation)
+
+## Introduction
+
 Rate limiting based on resource usage - either RAM and/or CPU. If resource usage rises above a defined threshold, rate limiting restricts further requests to avoid resource exhaustion by incoming request processing.
 
 An initial rate limit is used to "slow start" the maximum allowed requests.
