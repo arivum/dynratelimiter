@@ -1,5 +1,10 @@
 # DynRateLimiter
 
+![Helm](https://github.com/arivum/dynratelimiter/workflows/Helm/badge.svg)
+![Docker](https://github.com/arivum/dynratelimiter/workflows/Docker%20Image%20CI/badge.svg)
+![GitHub go.mod Go version (branch)](https://img.shields.io/github/go-mod/go-version/arivum/dynratelimiter/master)
+![GitHub](https://img.shields.io/github/license/arivum/dynratelimiter)
+
 ## Table of contents
 * [Introduction](#introduction)
 * [Run locally ...](#run-locally-)
