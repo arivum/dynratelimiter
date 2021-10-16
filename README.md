@@ -10,7 +10,6 @@
   + [Possible annotations for controlling DynRateLimiter](#possible-annotations-for-controlling-dynratelimiter)
 * [Development](#development)
   + [Run and Test locally](#run-and-test-locally)
-  + [Rate limit calculation](#rate-limit-calculation)
 
 ## Introduction
 
@@ -154,7 +153,7 @@ spec:
   for i in {0..100}; do curl -q localhost:2000 &; done
   ```
 
-### Rate limit calculation
+<!-- ### Rate limit calculation
 ```math
 \begin{aligned}
 t \in [0,1]     &&&&&&&   \text{resource threshold} \\
@@ -172,4 +171,4 @@ m_{cur}         &&&&&&&   \text{current resource usage} \\
     0                 & \quad \textrm{otherwise}
   \end{array}
 \right.
-```
+``` -->
