@@ -2,7 +2,8 @@
 
 ### About
 ![Maintainer](https://img.shields.io/badge/maintainer-arivum-blue)
-![GitHub go.mod Go version (branch)](https://img.shields.io/github/go-mod/go-version/arivum/dynratelimiter/master) 
+![Release](https://img.shields.io/github/v/release/arivum/dynratelimiter)
+![GitHub go.mod Go version (branch)](https://img.shields.io/github/go-mod/go-version/arivum/dynratelimiter) 
 ![GitHub](https://img.shields.io/github/license/arivum/dynratelimiter)
 
 ### CI/CD
