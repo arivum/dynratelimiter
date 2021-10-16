@@ -7,9 +7,9 @@
 ![GitHub](https://img.shields.io/github/license/arivum/dynratelimiter)
 
 ### CI/CD
-![Go](https://github.com/arivum/dynratelimiter/workflows/Go/badge.svg)
-![Docker](https://github.com/arivum/dynratelimiter/workflows/Docker%20Image%20CI/badge.svg)
-![Helm](https://github.com/arivum/dynratelimiter/workflows/Helm/badge.svg)
+![Go](https://img.shields.io/github/workflow/status/arivum/dynratelimiter/Go?label=Go)
+![Docker](https://img.shields.io/github/workflow/status/arivum/dynratelimiter/Docker%20Image%20CI?label=Docker)
+![Helm](https://img.shields.io/github/workflow/status/arivum/dynratelimiter/Helm?label=Helm)
 
 ## Table of contents
 * [Introduction](#introduction)
