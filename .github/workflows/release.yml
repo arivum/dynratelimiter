@@ -25,6 +25,9 @@ jobs:
     - name: Install dependencies
       run: sudo apt install -y make clang linux-headers-generic ca-certificates libc6-dev-i386
 
+    - name: Go build
+      run: make build
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
