@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	code.cloudfoundry.org/bytefmt v0.0.0-20210608160410-67692ebc98de
-	github.com/arivum/resource-ticker v0.0.0-20211011192127-56800994a8a4
+	github.com/arivum/resource-ticker v0.1.2
 	github.com/cheggaaa/pb v1.0.29
 	github.com/cilium/ebpf v0.6.2
 	github.com/fatih/color v1.13.0
