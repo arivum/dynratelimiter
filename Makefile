@@ -1,7 +1,7 @@
 COMMIT := $(shell git describe --dirty --always)
 TAG := $(shell git describe --tags $(git rev-list --tags --max-count=1))
 
-LDFLAGS := "-s -w -X main.GitCommit=$(COMMIT)"
+LDFLAGS := "-s -w -X main.GitCommit=$(COMMIT) -X main.Version=$(TAG)"
 
 .PHONY: build
 .DEFAULT_GOAL := build
