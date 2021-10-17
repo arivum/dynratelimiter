@@ -38,7 +38,7 @@ As shown in the figures below, DynRateLimiter can increase the total thoughput o
 
 ### ... via Go install
 ```bash
-go install github.com/arivum/dynratelimiter@v0.1.0
+go install github.com/arivum/dynratelimiter@v0.1.1
 ```
 
 ### ... by downloading latest release
