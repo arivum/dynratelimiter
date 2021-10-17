@@ -13,7 +13,7 @@ thresholds:
 # specify a list of interfaces to attach the ratelimiter.
 # If list is empty, the ratelimiter will be attached to all interfaces in the current netns
 interfaces:
-  - lo
+#  - lo
 # specify logging options
 logging:
   # loglevel must be one of [info, debug, warn, error, trace].

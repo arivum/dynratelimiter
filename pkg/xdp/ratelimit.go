@@ -26,14 +26,16 @@ func (x *XDPState) calculateRatelimit(res resources.Resources) error {
 	}
 
 	if x.shouldRecalculate(accRequests, res) {
-		if x.thresholds.cpu > 0 {
+		switch {
+		case x.thresholds.cpu > 0 && x.thresholds.ram > 0:
 			deltaCPURateLimit = x.calculateCPURateLimitDelta(res.CPU)
-		}
-
-		if x.thresholds.ram > 0 {
 			deltaRAMRateLimit = x.calculateRAMRateLimitDelta(res.RAM)
+			x.rateLimit = x.rateLimit + uint32(math.Min(deltaCPURateLimit, deltaRAMRateLimit))
+		case x.thresholds.cpu > 0 && x.thresholds.ram <= 0:
+			x.rateLimit = x.rateLimit + uint32(x.calculateCPURateLimitDelta(res.CPU))
+		case x.thresholds.ram > 0 && x.thresholds.cpu <= 0:
+			x.rateLimit = x.rateLimit + uint32(x.calculateRAMRateLimitDelta(res.RAM))
 		}
-		x.rateLimit = x.rateLimit + uint32(math.Min(deltaCPURateLimit, deltaRAMRateLimit))
 	}
 
 	return nil
@@ -86,9 +88,9 @@ func (x *XDPState) shouldRecalculate(accRequests uint32, res resources.Resources
 	switch {
 	case float64(accRequests) >= 0.8*float64(x.rateLimit):
 		return true
-	case float64(res.RAM.Used) > x.thresholds.ram*float64(res.RAM.Total):
+	case float64(res.RAM.Used) > x.thresholds.ram*float64(res.RAM.Total) && x.thresholds.ram > 0:
 		return true
-	case res.CPU.Usage > x.thresholds.cpu:
+	case res.CPU.Usage > x.thresholds.cpu && x.thresholds.cpu > 0:
 		return true
 	default:
 		return false
