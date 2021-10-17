@@ -23,7 +23,7 @@ jobs:
         go-version: 1.16
 
     - name: Install dependencies
-      run: apt install -y make clang linux-headers-generic ca-certificates libc6-dev-i386
+      run: sudo apt install -y make clang linux-headers-generic ca-certificates libc6-dev-i386
 
     - name: Create Release
       id: create_release
