@@ -22,6 +22,6 @@ const (
 )
 
 var (
-	defaultCaps          = []v1core.Capability{"NET_ADMIN", "SYS_ADMIN", "SYS_RESOURCE", "IPC_LOCK"}
+	defaultCaps          = []v1core.Capability{"NET_ADMIN", "SYS_ADMIN", "SYS_RESOURCE"}
 	initContainerCommand = []string{"cp", "-rf", "/usr/bin/dynratelimiter", volumeMount}
 )
