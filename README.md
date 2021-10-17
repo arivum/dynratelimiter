@@ -15,6 +15,7 @@
 * [Introduction](#introduction)
 * [Run locally ...](#run-locally-)
   + [... via Go install](#-via-go-install)
+  + [... by downloading latest release](#-by-downloading-latest-release)
   + [... and show usage](#-and-show-usage)
   + [... with configuration file](#-with-configuration-file)
 * [Inject into Kubernetes pods](#inject-into-kubernetes-pods)
@@ -38,6 +39,12 @@ As shown in the figures below, DynRateLimiter can increase the total thoughput o
 ### ... via Go install
 ```bash
 go install github.com/arivum/dynratelimiter@v0.1.0
+```
+
+### ... by downloading latest release
+```bash
+sudo wget https://github.com/arivum/dynratelimiter/releases/download/v0.1.1/dynratelimiter -O /usr/bin/dynratelimiter
+sudo chmod +x /usr/bin/dynratelimiter
 ```
 
 ### ... and show usage
