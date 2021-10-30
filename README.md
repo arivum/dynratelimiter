@@ -38,12 +38,12 @@ As shown in the figures below, DynRateLimiter can increase the total thoughput o
 
 ### ... via Go install
 ```bash
-go install github.com/arivum/dynratelimiter@v0.1.2
+go install github.com/arivum/dynratelimiter@v0.1.3
 ```
 
 ### ... by downloading latest release
 ```bash
-sudo wget https://github.com/arivum/dynratelimiter/releases/download/v0.1.2/dynratelimiter -O /usr/bin/dynratelimiter
+sudo wget https://github.com/arivum/dynratelimiter/releases/download/v0.1.3/dynratelimiter -O /usr/bin/dynratelimiter
 sudo chmod +x /usr/bin/dynratelimiter
 ```
 
@@ -99,14 +99,14 @@ To inject the DynRateLimiter into Kubernetes pods, deploy the DynRateLimiter Ope
 
 ```bash
 # Add the repository to helm
-helm repo add dynratelimiter https://arivum.github.io/dynratelimiter
+helm repo add arivum https://arivum.github.io/helm-charts
 helm repo update
 
 # Create your my_values.yaml to adjust default values for the operator
 touch my_values.yaml
 
 # Deploy the operator
-helm upgrade --install -f my_values.yaml dynratelimiter-operator dynratelimiter/dynratelimiter-operator
+helm upgrade --install -f my_values.yaml dynratelimiter-operator arivum/dynratelimiter-operator
 
 # Show if operator came up successfully
 kubectl --namespace dynratelimiter-operator get pods

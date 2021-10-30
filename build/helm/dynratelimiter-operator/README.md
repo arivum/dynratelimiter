@@ -1,5 +1,7 @@
 ### DynRateLimiter Operator
 
+Before using this operator, please read our [documentation](https://github.com/arivum/dynratelimiter)
+
 Create your `values.yaml`
 
 ```yaml
