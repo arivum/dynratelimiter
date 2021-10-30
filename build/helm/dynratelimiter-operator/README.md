@@ -6,15 +6,15 @@ Create your `values.yaml`
 # your values.yaml to override default values
 namespace: finnie-pipeline-operator-system
 image:
-	pullSecrets:
-		- name: my-pullsecret
+  pullSecrets:
+    - name: my-pullsecret
 ```
 
 Then, install the `DynRateLimiter Operator` with Helm:
 
 ```bash
 # deploy using your values.yaml
-helm install -f values.yaml dynratelimiter-operator arivum/dynratelimiter-operator
+helm install -f values.yaml dynratelim-operator arivum/dynratelimiter-operator
 ```
 
 #### Available chart properties
