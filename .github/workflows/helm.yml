@@ -34,6 +34,7 @@ jobs:
         sed -i "s#ersion: latest#ersion: ${{ steps.release_name.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/Chart.yaml
         sed -i "s#ersion: v#ersion: #g" ../build/helm/dynratelimiter-operator/Chart.yaml
         helm package ../build/helm/dynratelimiter-operator
+        cp ../build/helm/dynratelimiter-operator/README.md ../../helm-charts/dynratelimiter-operator.md
         mv * ../../helm-charts/
         cd ../../helm-charts
         helm repo index . --url https://arivum.github.io/helm-charts
