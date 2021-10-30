@@ -20,11 +20,12 @@ jobs:
         path: ${{ steps.release_name.outputs.VERSION }}
         ref: ${{ steps.release_name.outputs.VERSION }}
 
-    - name: Checkout gh-pages
+    - name: Checkout helm-charts
       uses: actions/checkout@v2
       with:
-        path: gh-pages
-        ref: gh-pages
+        path: helm-charts
+        ref: main
+        repository: arivum/helm-charts
 
     - name: Build chart repo
       run: |
@@ -34,10 +35,9 @@ jobs:
         sed -i "s#ersion: latest#ersion: ${{ steps.release_name.outputs.VERSION }}#g" ../build/helm/dynratelimiter-operator/Chart.yaml
         sed -i "s#ersion: v#ersion: #g" ../build/helm/dynratelimiter-operator/Chart.yaml
         helm package ../build/helm/dynratelimiter-operator
-        mv * ../../gh-pages/
-        cd ../../gh-pages
-        helm repo index . --url https://arivum.github.io/dynratelimiter
-        cp ../${{ steps.release_name.outputs.VERSION }}/README.md .
+        mv * ../../helm-charts/
+        cd ../../helm-charts
+        helm repo index . --url https://arivum.github.io/helm-charts
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
