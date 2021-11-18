@@ -16,6 +16,6 @@ require (
 	github.com/vishvananda/netlink v1.1.0
 	golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6
 	gopkg.in/yaml.v2 v2.4.0
-	k8s.io/api v0.22.3
-	k8s.io/apimachinery v0.22.3
+	k8s.io/api v0.22.4
+	k8s.io/apimachinery v0.22.4
 )
