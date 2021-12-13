@@ -12,9 +12,9 @@ require (
 	github.com/mattn/go-runewidth v0.0.12 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1
-	github.com/spf13/viper v1.9.0
+	github.com/spf13/viper v1.10.0
 	github.com/vishvananda/netlink v1.1.0
-	golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6
+	golang.org/x/sys v0.0.0-20211205182925-97ca703d548d
 	gopkg.in/yaml.v2 v2.4.0
 	k8s.io/api v0.22.3
 	k8s.io/apimachinery v0.22.3
