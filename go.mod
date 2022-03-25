@@ -10,9 +10,9 @@ require (
 	github.com/fatih/color v1.13.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/sirupsen/logrus v1.8.1
-	github.com/spf13/viper v1.9.0
+	github.com/spf13/viper v1.10.1
 	github.com/vishvananda/netlink v1.1.0
-	golang.org/x/sys v0.0.0-20210927094055-39ccf1dd6fa6
+	golang.org/x/sys v0.0.0-20211210111614-af8b64212486
 	gopkg.in/VividCortex/ewma.v1 v1.1.1 // indirect
 	gopkg.in/cheggaaa/pb.v2 v2.0.7 // indirect
 	gopkg.in/fatih/color.v1 v1.7.0 // indirect
