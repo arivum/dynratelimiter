@@ -6,7 +6,7 @@ require (
 	code.cloudfoundry.org/bytefmt v0.0.0-20210608160410-67692ebc98de
 	github.com/arivum/resource-ticker v0.1.3
 	github.com/cheggaaa/pb v1.0.29
-	github.com/cilium/ebpf v0.6.2
+	github.com/cilium/ebpf v0.9.0
 	github.com/fatih/color v1.13.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/sirupsen/logrus v1.8.1
